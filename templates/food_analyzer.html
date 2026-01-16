@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Food Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+
+        .result h3 {
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .nutrition-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nutrition-list li {
+            padding: 5px 0;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🍎 AI Food Analyzer</h2>
+
+    <form action="/analyze-food" method="POST" enctype="multipart/form-data">
+        <input type="file" name="food_image" accept="image/*" required>
+        <button type="submit">Analyze Food</button>
+    </form>
+
+    {% if analysis %}
+        {% if analysis.error %}
+            <div class="error">
+                {{ analysis.error }}
+            </div>
+        {% else %}
+            <div class="result">
+                <h3>Detected Food</h3>
+                <p><strong>{{ analysis.food }}</strong></p>
+
+                <h3>Image Caption</h3>
+                <p>{{ analysis.caption }}</p>
+
+                <h3>Nutrition Information</h3>
+                <ul class="nutrition-list">
+                    {% for key, value in analysis.nutrition.items() %}
+                        <li><strong>{{ key }}:</strong> {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+</body>
+</html>

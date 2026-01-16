@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Fitness Dashboard</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 40px; }
+        th, td { border: 1px solid #aaa; padding: 8px; text-align: center; }
+        th { background: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+<h1>Your Fitness Dashboard</h1>
+
+<h2>BMI: {{ bmi }}</h2>
+
+<!-- MEAL PLAN -->
+<h2>7-Day Meal Plan</h2>
+<table>
+    <tr>
+        <th>Day</th>
+        <th>Dish</th>
+        <th>Calories</th>
+        <th>Carbs</th>
+        <th>Protein</th>
+        <th>Fats</th>
+    </tr>
+    {% if diet %}
+  {% for row in diet %}
+  <tr>
+      <td>{{ row.day }}</td>
+      <td>{{ row.dish }}</td>
+      <td>{{ row.calories }}</td>
+      <td>{{ row.carbs }}</td>
+      <td>{{ row.protein }}</td>
+      <td>{{ row.fats }}</td>
+  </tr>
+  {% endfor %}
+{% else %}
+  <tr>
+      <td colspan="6">No meal plan available</td>
+  </tr>
+{% endif %}
+
+</table>
+
+<!-- WORKOUT PLAN -->
+<h2>7-Day Workout Plan</h2>
+<table>
+    <tr>
+        <th>Day</th>
+        <th>Workout Type</th>
+        <th>Session Duration (hrs)</th>
+        <th>Calories Burned</th>
+        <th>Fat %</th>
+        <th>Water (L)</th>
+        <th>Frequency</th>
+        <th>Experience</th>
+        <th>BMI</th>
+    </tr>
+    {% for w in workout %}
+<tr>
+    <td>{{ w.day }}</td>
+    <td>{{ w.workout_type }}</td>
+    <td>{{ w.session_duration }}</td>
+    <td>{{ w.calories_burned }}</td>
+    <td>{{ w.fat_percentage }}</td>
+    <td>{{ w.water }}</td>
+    <td>{{ w.frequency }}</td>
+    <td>{{ w.experience }}</td>
+    <td>{{ w.bmi }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<a href="/">Go Back</a>
+
+</body>
+</html>

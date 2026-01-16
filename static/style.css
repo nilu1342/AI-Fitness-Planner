@@ -1,0 +1,39 @@
+.hero {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 60px 30px;
+    border-radius: 16px;
+}
+
+.fitness-card {
+    border-radius: 18px;
+    border: none;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border-left: 4px solid #3498db;
+    padding-left: 10px;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2c80b4);
+    border: none;
+    border-radius: 12px;
+}

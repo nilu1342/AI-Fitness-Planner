@@ -1,0 +1,189 @@
+{% extends "layout.html" %}
+{% block title %}Home - AI Fitness Planner{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero text-center mb-5">
+        <h1 class="fw-bold">AI Fitness Planner</h1>
+        <p class="lead">Smart workout & diet plans designed just for you</p>
+    </div>
+
+    <!-- FORM -->
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="card fitness-card shadow-lg">
+                <div class="card-body p-4">
+
+                    <form action="/generate-plan" method="POST">
+
+                        <!-- BASIC INFO -->
+                        <div class="form-section">
+                            <h5 class="section-title">Basic Information</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Age</label>
+                                    <input type="number" class="form-control" name="age" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Gender</label>
+                                    <select class="form-select" name="gender" required>
+                                        <option disabled selected>Select</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BODY METRICS -->
+                        <div class="form-section">
+                            <h5 class="section-title">Body Metrics</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Height (cm)</label>
+                                    <input type="number" step="0.01" class="form-control" name="height" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Weight (kg)</label>
+                                    <input type="number" step="0.1" class="form-control" name="weight" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MEDICAL CONDITIONS -->
+<div class="form-section">
+    <h5 class="section-title">Medical Conditions (Optional)</h5>
+
+    <div class="row g-3">
+        <div class="col-md-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="medical[]" value="diabetes">
+                <label class="form-check-label">Diabetes</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="medical[]" value="blood_pressure">
+                <label class="form-check-label">Blood Pressure</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="medical[]" value="thyroid">
+                <label class="form-check-label">Thyroid</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="medical[]" value="asthma">
+                <label class="form-check-label">Asthma</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="otherConditionCheck">
+                <label class="form-check-label">Other</label>
+            </div>
+        </div>
+
+        <!-- CUSTOM CONDITION -->
+        <div class="col-md-12 d-none" id="otherConditionBox">
+            <label class="form-label mt-2">Please specify</label>
+            <input type="text" class="form-control"
+                   name="other_medical"
+                   placeholder="e.g. Knee pain, back pain, PCOS">
+        </div>
+    </div>
+</div>
+                        <!-- PREFERENCES -->
+                        <div class="form-section">
+                            <h5 class="section-title">Preferences</h5>
+                            <div class="row g-3">
+
+                                <!-- GOAL -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Fitness Goal</label>
+                                    <select class="form-select" name="goal" id="goalSelect" required>
+                                        <option value="weight_loss">Weight Loss</option>
+                                        <option value="muscle_gain">Muscle Gain</option>
+                                        <option value="fitness">General Fitness</option>
+                                        <option value="custom">Custom Goal</option>
+                                    </select>
+                                </div>
+
+                                <!-- CUSTOM GOAL -->
+                                <div class="col-md-6 d-none" id="customGoalBox">
+                                    <label class="form-label">Your Custom Goal</label>
+                                    <input type="text" class="form-control"
+                                           name="custom_goal"
+                                           placeholder="e.g. Fat loss + stamina">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Diet Preference</label>
+                                    <select class="form-select" name="diet" required>
+                                        <option value="veg">Vegetarian</option>
+                                        <option value="nonveg">Non-Vegetarian</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Budget</label>
+                                    <select class="form-select" name="budget" required>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary btn-lg px-5">
+                                Generate My Plan
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <!-- 🆕 FOOD ANALYZER CTA -->
+                    <div class="text-center mt-4">
+                        <a href="/upload-food" class="btn btn-outline-success btn-lg px-5">
+                            🍽️ Analyze My Meal
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- JS -->
+<script>
+    const goalSelect = document.getElementById("goalSelect");
+    const customGoalBox = document.getElementById("customGoalBox");
+
+    goalSelect.addEventListener("change", () => {
+        if (goalSelect.value === "custom") {
+            customGoalBox.classList.remove("d-none");
+        } else {
+            customGoalBox.classList.add("d-none");
+        }
+    });
+    const otherCheck = document.getElementById("otherConditionCheck");
+    const otherBox = document.getElementById("otherConditionBox");
+
+    otherCheck.addEventListener("change", () => {
+        if (otherCheck.checked) {
+            otherBox.classList.remove("d-none");
+        } else {
+            otherBox.classList.add("d-none");
+        }
+    });
+</script>
+
+{% endblock %}
