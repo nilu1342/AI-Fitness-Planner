@@ -6,7 +6,7 @@ A full-stack AI-powered fitness website that provides personalized workout plans
 - Python
 - Flask
 - Hugging Face Transformers
-- HTML, CSS, Bootstrap
+- HTML, CSS, Bootstrap, JS
 - Pandas
 
 ## How to Run
