@@ -1,8 +1,12 @@
+# Ensure latest pip, setuptools, and wheel
 pip>=25.3
 setuptools>=68.0
 wheel
-Flask==3.0.1
-gunicorn==21.2.0
+
+# Streamlit for the web interface
+streamlit==1.26.1
+
+# Data & ML libraries
 pandas==2.0.2
 numpy==1.24.4
 requests==2.31.0
@@ -10,3 +14,4 @@ transformers==4.39.3
 torch==2.2.0
 huggingface-hub==0.19.4
 sentencepiece==0.1.99
+Pillow==10.1.0
