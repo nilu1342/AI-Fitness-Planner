@@ -3,7 +3,7 @@ gunicorn==21.2.0
 pandas==2.0.3
 numpy==1.25.2
 requests==2.31.0
-transformers==5.5.0
+transformers==4.39.3
 torch==2.2.0
-huggingface-hub==1.2.3
+huggingface-hub==0.19.4
 sentencepiece==0.1.99
